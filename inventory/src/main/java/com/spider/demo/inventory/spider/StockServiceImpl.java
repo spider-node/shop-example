@@ -64,7 +64,7 @@ public class StockServiceImpl implements StockService {
         // 扣减库存
         stock.setGoodNumber(stock.getGoodNumber().subtract(stock.getLockNumber()));
         iStockService.lambdaUpdate()
-                .set(Stock::getGoodNumber,stock.getGoodNumber())
+                .set(Stock::getGoodNumber,stock.getGoodNumber().subtract(stock.getLockNumber()))
                 .set(Stock :: getLockNumber,BigDecimal.ZERO)
                 .set(Stock :: getLockStatus,"UNLOCK")
                 .eq(Stock::getLockCode,param.getLockCode()).update();
