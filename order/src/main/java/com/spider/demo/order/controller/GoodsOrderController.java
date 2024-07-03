@@ -1,5 +1,4 @@
 package com.spider.demo.order.controller;
-
 import cn.spider.framework.linker.client.data.SpiderFunctionParam;
 import cn.spider.framework.linker.client.okhttp.SpiderClient;
 import com.spider.demo.order.entity.PlaceOrderParam;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
 
 /**
@@ -29,6 +27,14 @@ public class GoodsOrderController {
     public void createBill(@RequestBody PlaceOrderParam param){
         SpiderFunctionParam spiderParam = new SpiderFunctionParam();
         spiderParam.setFunctionId("05fc0340-6a19-4141-a553-93154d3621e6");
+        spiderParam.setRequest(param);
+        spiderClient.startFunctionOkhttp(JsonObject.mapFrom(spiderParam));
+    }
+
+    @PostMapping("/create_order_v2")
+    public void createBill_v2(@RequestBody PlaceOrderParam param){
+        SpiderFunctionParam spiderParam = new SpiderFunctionParam();
+        spiderParam.setFunctionId("6222b5c8-e55b-461c-8686-fac9dfb48619");
         spiderParam.setRequest(param);
         spiderClient.startFunctionOkhttp(JsonObject.mapFrom(spiderParam));
     }

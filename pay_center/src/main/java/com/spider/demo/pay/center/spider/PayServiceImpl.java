@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 @Slf4j
@@ -106,5 +107,27 @@ public class PayServiceImpl implements PayService {
         String status = payCenter.getOrderStatus().equals(PayStatus.WAIT_PAID) ? Constant.WAIT : Constant.SUSS;
         log.warn("queryPayStatus-status {}", status);
         return PayStatusRsp.builder().status(status).build();
+    }
+
+    @Override
+    public PayCenterArea payV2(CreatePayOrderParam param) {
+        log.info("create-pay-param {}", JSON.toJSONString(param));
+        PayCenter payCenter = new PayCenter();
+        payCenter.setPayMoney(payCenter.getPayMoney());
+        payCenter.setPayOrder(UUID.randomUUID().toString());
+        payCenter.setPayType(param.getPayType());
+        payCenter.setPayUser(param.getPayUser());
+        payCenter.setGoodCode(param.getGoodCode());
+        Random random = new Random();
+        int randomNumber = random.nextInt(10);
+        PayStatus payStatus = randomNumber > 5 ? PayStatus.PAID : PayStatus.FAIL;
+        payCenter.setOrderStatus(payStatus);
+        payCenter.setOtherNo(param.getOtherNo());
+        payCenterService.save(payCenter);
+        PayCenterArea payCenterArea = new PayCenterArea();
+        BeanUtils.copyProperties(payCenter, payCenterArea);
+        payCenterArea.setOrderStatus(payStatus.name());
+        log.info("create-pay-rsp {}", JSON.toJSONString(payCenterArea));
+        return payCenterArea;
     }
 }

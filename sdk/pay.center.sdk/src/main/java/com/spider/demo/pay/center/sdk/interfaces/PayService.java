@@ -27,4 +27,9 @@ public interface PayService {
     @TaskService(name = "query_pay_status",functionName = "查询支付状态",desc = "用于轮询获取支付状态")
     PayStatusRsp queryPayStatus(PayStatusParam param);
 
+    // 创建订单并发起支付，支付结果-通过随机书
+    @TaskService(name = "create_and_pay",functionName = "发起支付v2",desc = "向第三方发起支付v2")
+    @NoticeScope(scope = {ScopeTypeEnum.STABLE}, target = "pay")
+    PayCenterArea payV2(CreatePayOrderParam param);
+
 }

@@ -30,15 +30,15 @@ public class StockServiceImpl implements StockService {
         log.info("lock-stock-param {}", JSON.toJSONString(param));
         Stock stock = iStockService.lambdaQuery().eq(Stock :: getGoodCode,param.getGoodsCode()).one();
         if(Objects.isNull(stock)){
-            return LockStockRsp.builder().lockStatus(false).remark("没有找到商品库存").build();
+            Preconditions.checkArgument(false,"没有找到商品库存");
         }
 
         if(stock.getLockNumber().compareTo(BigDecimal.ZERO) > 0){
-            return LockStockRsp.builder().lockStatus(false).remark("库存被锁住").build();
+            Preconditions.checkArgument(false,"库存被锁住,不允许操作");
         }
         // 校验库存
         if(stock.getGoodNumber().subtract(param.getLockNumber()).compareTo(BigDecimal.ZERO) < 0){
-            return LockStockRsp.builder().lockStatus(false).remark("库存不足").build();
+            Preconditions.checkArgument(false,"库存不足");
         }
         // 设置库存
         stock.setLockNumber(stock.getLockNumber().add(param.getLockNumber()));
