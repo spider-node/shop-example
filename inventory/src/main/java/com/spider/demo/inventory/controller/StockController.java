@@ -1,6 +1,7 @@
 package com.spider.demo.inventory.controller;
 import com.spider.demo.inventory.entity.Stock;
 import com.spider.demo.inventory.service.IStockService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,10 @@ public class StockController {
     // 修改库存
     @PostMapping("/update_stock")
     public void updateStock(@RequestBody Stock param) {
-        stockService.lambdaUpdate().set(Stock :: getLockCode,param.getLockCode()).eq(Stock :: getId,param.getId()).update();
+        stockService.lambdaUpdate()
+                .set(Stock :: getLockCode, StringUtils.isEmpty(param.getLockCode()) ? "" : param.getLockCode())
+                .set(Stock :: getLockNumber,param.getLockNumber())
+                .set(StringUtils.isNotEmpty(param.getLockStatus()),Stock :: getLockStatus,param.getLockStatus())
+                .eq(Stock :: getId,param.getId()).update();
     }
 }

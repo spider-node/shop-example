@@ -16,7 +16,7 @@ spring:
       name: inventory
   dataSource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.106.62.142:3306/spider_demo
+    url: jdbc:mysql://47.109.67.130:3306/spider_demo
     userName: spider_demo
     password: spider_demo
     maxActive: 20
