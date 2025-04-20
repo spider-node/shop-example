@@ -5,19 +5,18 @@ server:
 spider:
   server:
     ip: localhost
-    port: 8081
+    port: 8088
   worker:
     name: stock
     rpc-port: 9640
+  dataSource:
+    url: jdbc:mysql://47.109.67.130:3306/spider_1.0.2_old
+    userName: spider_1.0.2_old
+    password: aB.967426
+    maxActive: 20
+    initialSize: 5
 
 spring:
   application:
     application:
       name: inventory
-  dataSource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.109.67.130:3306/spider_demo
-    userName: spider_demo
-    password: spider_demo
-    maxActive: 20
-    initialSize: 5

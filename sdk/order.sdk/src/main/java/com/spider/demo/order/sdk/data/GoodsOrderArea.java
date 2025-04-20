@@ -1,4 +1,5 @@
 package com.spider.demo.order.sdk.data;
+import cn.spider.framework.annotation.StaTaskField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class GoodsOrderArea {
     /**
      * 自增id
      */
+    @StaTaskField("goodsOrder.goodNumber")
     private Long id;
 
     /**

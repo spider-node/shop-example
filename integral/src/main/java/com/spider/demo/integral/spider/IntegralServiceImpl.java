@@ -20,6 +20,9 @@ public class IntegralServiceImpl implements IntegralService {
     @Resource
     private IIntegralService iIntegralService;
 
+
+
+
     /**
      * 计算计费抵扣
      * @param param 用户与兑换金额

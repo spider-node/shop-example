@@ -69,8 +69,6 @@ public class GoodsOrderServiceImpl implements GoodsOrderService {
     public GoodsOrderArea updateDeduction(UpdateDeductionParam param) {
         log.info("update-deduction-param {}", JSON.toJSONString(param));
         GoodsOrder goodsOrder = iGoodsOrderService.lambdaQuery().eq(GoodsOrder :: getOrderNo,param.getOrderNo()).one();
-        goodsOrder.setDeductionAmount(param.getDeductionAmount());
-        goodsOrder.setActualPayment(goodsOrder.getOrderMoney().subtract(param.getDeductionAmount()));
         iGoodsOrderService.updateById(goodsOrder);
         log.info("update-deduction-after-info {}", JSON.toJSONString(goodsOrder));
         GoodsOrderArea goodsOrderArea = new GoodsOrderArea();

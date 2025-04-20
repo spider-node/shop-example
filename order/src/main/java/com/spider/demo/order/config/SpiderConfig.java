@@ -1,9 +1,13 @@
 package com.spider.demo.order.config;
 
+import cn.spider.framework.client.config.SpiderClintConfig;
+import cn.spider.framework.client.config.SpiderDataSourceConfig;
+import cn.spider.framework.client.config.TransactionConfig;
 import cn.spider.framework.linker.client.config.CommonConfig;
 import cn.spider.framework.linker.client.config.GrpcConfig;
 import cn.spider.framework.linker.client.okhttp.SpiderClient;
 import io.vertx.ext.web.client.WebClient;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +21,7 @@ import org.springframework.context.annotation.Import;
  * @Description: spider配置类
  * @Version: 1.0
  */
-@Import({CommonConfig.class, GrpcConfig.class})
+@Import({CommonConfig.class, GrpcConfig.class, SpiderClintConfig.class, SpiderDataSourceConfig.class, TransactionConfig.class})
 @Configuration
 public class SpiderConfig {
     @Bean

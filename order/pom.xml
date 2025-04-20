@@ -68,11 +68,6 @@
 				</exclusion>
 
 				<exclusion>
-					<groupId>cn.spider-node</groupId>
-					<artifactId>spider-transaction</artifactId>
-				</exclusion>
-
-				<exclusion>
 					<groupId>com.google.api.grpc</groupId>
 					<artifactId>proto-google-common-protos</artifactId>
 				</exclusion>

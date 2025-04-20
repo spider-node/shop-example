@@ -61,16 +61,6 @@ public class GoodsOrder implements Serializable {
     private OrderStatus orderStatus;
 
     /**
-     * 抵扣金额
-     */
-    private BigDecimal deductionAmount;
-
-    /**
-     * 实际支付金额
-     */
-    private BigDecimal actualPayment;
-
-    /**
      * 备注
      */
     private String remarks;
